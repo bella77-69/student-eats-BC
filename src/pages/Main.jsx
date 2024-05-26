@@ -8,7 +8,7 @@ const Hero = () => {
         <img 
            src={logo}
           alt="Hero Image" 
-          className="mx-auto mb-8 w-full h-64 object-cover rounded-lg shadow-lg"
+          className="mx-auto mb-8 w-full h-65 object-cover rounded-lg shadow-lg"
         />
         <h1 className="text-4xl font-bold text-gray-800 mb-4">
           Welcome to Student Eats BC!

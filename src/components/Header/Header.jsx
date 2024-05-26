@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function NavbarActionButton() {
+export default function Header() {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState(null);
 
@@ -21,7 +21,7 @@ export default function NavbarActionButton() {
             aria-label="WindUI logo"
             aria-current="page"
             className="flex items-center gap-2 whitespace-nowrap py-3 text-lg focus:outline-none lg:flex-1"
-            href="#"
+            href="/"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +113,7 @@ export default function NavbarActionButton() {
             <li className="flex items-stretch">
               <a
                 className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:text-emerald-600 focus:outline-none focus-visible:outline-none lg:px-8"
-                href="#"
+                href="/"
               >
                 Home
               </a>
@@ -121,38 +121,26 @@ export default function NavbarActionButton() {
             <li className="flex items-stretch">
               <a
                 className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:text-emerald-600 focus:outline-none focus-visible:outline-none lg:px-8"
-                href="#"
+                href="./flyers"
               >
-                Price Trends
+                Flyer Deals
               </a>
             </li>
-
-            <li role="none" className="flex items-stretch relative">
+            <li className="flex items-stretch">
               <a
-                role="menuitem"
-                aria-haspopup="true"
                 className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:text-emerald-600 focus:outline-none focus-visible:outline-none lg:px-8"
-                onClick={() => handleSubMenuToggle("community")}
+                href="./contact"
               >
-                <span>Community</span>
-                
+                Contact
               </a>
-              {openSubMenu === "community" && (
-                <ul className="absolute left-0 top-full mt-2 w-40 bg-white shadow-lg border rounded-md">
-                  <li className="py-2 px-4 hover:bg-emerald-500 hover:text-white">
-                    <a href="javascript:void(0)">Community Forum</a>
-                  </li>
-                  <li className="py-2 px-4 hover:bg-emerald-500 hover:text-white">
-                    <a href="javascript:void(0)">Events Calendar</a>
-                  </li>
-                </ul>
-              )}
             </li>
 
             <li className="flex items-stretch relative">
               <button
                 className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:text-emerald-600 focus:outline-none focus-visible:outline-none lg:px-8"
                 onClick={() => handleSubMenuToggle("resources")}
+                aria-haspopup="true"
+                aria-expanded={openSubMenu === "resources"}
               >
                 Resources
                 <svg
@@ -162,11 +150,13 @@ export default function NavbarActionButton() {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   strokeWidth="1.5"
-                  aria-labelledby="t-01 d-01"
-                  role="graphics-symbol"
+                  aria-labelledby="resources-icon-title resources-icon-desc"
+                  role="img"
                 >
-                  <title id="t-01">Button icon</title>
-                  <desc id="d-01">An icon describing the buttons usage</desc>
+                  <title id="resources-icon-title">Expand Resources</title>
+                  <desc id="resources-icon-desc">
+                    Click to expand the resources submenu
+                  </desc>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -176,27 +166,47 @@ export default function NavbarActionButton() {
               </button>
               {openSubMenu === "resources" && (
                 <ul className="absolute left-0 top-full mt-2 w-60 bg-white shadow-lg border rounded-md">
-                  <li className="py-2 px-4 hover:bg-emerald-500 hover:text-white">
-                    <a href="#">Budgeting Tools</a>
-                  </li>
-                  <li className="py-2 px-4 hover:bg-emerald-500 hover:text-white">
-                    <a href="#">Resources Directory</a>
-                  </li>
-                  <li className="py-2 px-4 hover:bg-emerald-500 hover:text-white">
-                    <a href="#">Educational Content</a>
-                  </li>
-                  <li className="py-2 px-4 hover:bg-emerald-500 hover:text-white">
-                    <a href="#">Interactive Maps</a>
-                  </li>
+                  {[
+                    {
+                      href: "/resources/budgeting-tools",
+                      text: "Budgeting Tools",
+                    },
+                    {
+                      href: "/resources/community-forum",
+                      text: "Community Forum",
+                    },
+                    {
+                      href: "/resources/events-calendar",
+                      text: "Events Calendar",
+                    },
+                    {
+                      href: "/resources/resources-directory",
+                      text: "Resources Directory",
+                    },
+                    {
+                      href: "/resources/educational-content",
+                      text: "Educational Content",
+                    },
+                    { href: "/resources/maps", text: "Interactive Maps" },
+                  ].map((item, index) => (
+                    <li
+                      key={index}
+                      className="py-2 px-4 hover:bg-emerald-500 hover:text-white"
+                    >
+                      <a href={item.href} tabindex="0">
+                        {item.text}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               )}
             </li>
           </ul>
-          <div className="ml-auto flex items-center px-6 lg:ml-0 lg:p-0">
+          {/* <div className="ml-auto flex items-center px-6 lg:ml-0 lg:p-0">
             <button className="inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded bg-emerald-500 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-emerald-200 transition duration-300 hover:bg-emerald-600 hover:shadow-sm hover:shadow-emerald-200 focus:bg-emerald-700 focus:shadow-sm focus:shadow-emerald-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-300 disabled:shadow-none">
-              Contact Us
+              <a href="/contact">Contact Us</a>
             </button>
-          </div>
+          </div> */}
         </nav>
       </div>
     </header>
